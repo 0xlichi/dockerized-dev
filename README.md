@@ -93,7 +93,7 @@ With a persistent workspace (recommended):
 ```bash
 docker run -it \
   --name mydev \
-  -v "$HOME/projects:/home/apple/projects" \
+  -v "$HOME/Projects:/home/apple/Projects" \
   0xlichi/dev
 ```
 
