@@ -11,6 +11,7 @@ Passwords are set using Docker BuildKit secrets so they are never stored in imag
 .
 ├── Dockerfile
 ├── .dockerignore
+├── .gitignore
 ├── .bashrc
 ├── .fonts/
 ├── yazi/
