@@ -1,0 +1,60 @@
+# ~/.bashrc
+#
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto --group-directories-first'
+alias ll='ls -Alh --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+
+eval "$(starship init bash)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+export STARSHIP_CACHE=~/.starship/cache
+
+# My Custom Alias
+alias clr='clear'
+alias ff='fastfetch | lolcat'
+alias cd='z'
+alias rm='rm -i'
+alias ip='ip -br addr | lolcat'
+alias lg='lazygit'
+alias ldock='lazydocker'
+alias cp='cp -r'
+alias Time='date | cut -d " " -f 5 | cut -d ":" -f 1,2 | lolcat'
+alias cpu='sensors | grep Tctl | lolcat'
+alias nano='nvim'
+alias more='less'
+
+# --- trash-cli ---
+alias trash='trash-put'
+alias list-trash='trash-list'
+alias restore-trash='trash-restore'
+alias empty-trash='trash-empty'
+
+# --- bat ---
+alias pbat='bat -p'
+alias bat='bat -pn'
+alias cat='pbat'
+
+# --- git ---
+alias git-log='git log --oneline --graph --all'
+alias git-push='git push --force-with-lease'
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+
+# Setup zoxide
+eval "$(zoxide init bash)"
+
+# Setup Yazi
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd < "$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
+}
+
+# Set EDITOR
+export EDITOR='nvim'
